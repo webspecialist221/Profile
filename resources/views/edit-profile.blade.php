@@ -1,0 +1,216 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Xmee | Login and Register Form Html Templates</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png')}}">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="{{ asset('css/fontawesome-all.min.css')}}">
+	<!-- Flaticon CSS -->
+	<link rel="stylesheet" href="{{ asset('font/flaticon.css')}}">
+	<!-- Google Web Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="{{ asset('style.css')}}">
+	<link rel="stylesheet" href="{{ asset('css/screen.css')}}">
+</head>
+
+<body>
+	<!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+	<section class="fxt-template-animation fxt-template-layout1">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6 col-12 fxt-bg-color">
+					<div class="fxt-content">
+						<div class="fxt-header">
+							<!-- <a href="login-1.html" class="fxt-logo"><img src="img/logo-1.png" alt="Logo"></a> -->
+							<div class="fxt-page-switcher">
+								<a href="{{url('activity')}}" class="btn btn-light btn-outline-danger">Activity Log</a>
+								<a href="{{url('home')}}" class="ml-2 btn btn-light btn-outline-danger">Profile</a>
+								<a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="btn btn-danger ml-2"><span class="fas fa-power-off"></span></a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+							</div>
+						</div>
+						
+						<div class="fxt-form">
+							<h2>Edit Profile</h2>
+							<p>Change Password</p>
+							<form method="POST" action="{{ url('edit-password',Auth::user()->id) }}" id="form1">
+                        		@csrf
+                        		@method('put')
+								
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-3">
+										<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password" placeholder="Enter Your Password">
+										<i class="fas fa-lock"></i>
+										@error('password')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-3">
+										<input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" placeholder="Enter Confirm Password">
+										<i class="fas fa-lock"></i>
+										
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-4">
+										<button type="submit" class="fxt-btn-fill">Update Password</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="fxt-form">
+							<h2>Edit Profile</h2>
+							<p>Update Profile</p>
+							<form method="POST" action="{{ route('update.profile',Auth::user()->id) }}" id="form2">
+                        		@csrf
+                        		@method('put')
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-1">
+										<input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" autocomplete="name" placeholder="Enter Your Name" autofocus ><i class="fas fa-user"></i>
+
+										@error('name')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-2">
+										<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" autocomplete="email" placeholder="Enter Your Email Address" ><i class="fas fa-envelope"></i>
+										@error('email')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</div>
+
+								</div>
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-2">
+										<input type="text" class="form-control @error('address') is-invalid @enderror" name="address" placeholder="Enter your Address" id="address" value="{{ $user->address }}" autocomplete="adddress">
+										<i class="fas fa-map-marker-alt"></i>
+										@error('address')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-2">
+										<input type="text" class="form-control @error('skills') is-invalid @enderror" name="skills" placeholder="Enter Your Skill" id="skills" value="{{ $user->skills }}" autocomplete="skills">
+										<i class="fas fa-clipboard"></i>
+										@error('skills')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="fxt-transformY-50 fxt-transition-delay-4">
+										<button type="submit" class="fxt-btn-fill">Update Profile</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						
+					</div>
+				</div>
+				<div class="col-md-6 col-12 fxt-none-767 fxt-bg-img" data-bg-image="{{ asset('img/figure/bg1-r.jpg')}}"></div>
+			</div>
+		</div>
+	</section>
+	<!-- jquery-->
+	<script src="{{ asset('js/jquery-3.5.0.min.js')}}"></script>
+	<script src="{{ asset('js/jquery.validate.min.js')}}"></script>
+	<!-- Popper js -->
+	<script src="{{ asset('js/popper.min.js')}}"></script>
+	<!-- Bootstrap js -->
+	<script src="{{ asset('js/bootstrap.min.js')}}"></script>
+	<!-- Imagesloaded js -->
+	<script src="{{ asset('js/imagesloaded.pkgd.min.js')}}"></script>
+	<!-- Validator js -->
+	<script src="{{ asset('js/validator.min.js')}}"></script>
+	<!-- Custom Js -->
+	<script src="{{ asset('js/main.js')}}"></script>
+
+	<script>
+		$(document).ready(function(){
+           $('#form1').validate({
+              rules:{
+              	password: "required",
+			    password_confirmation: {
+			      equalTo: "#password"
+			    },
+              },
+              messages:{
+              	password:{
+              		required: "Password Field is required"
+              	},
+              	password_confirmation:{
+              		equalTo: "Password Not Matched"
+              	},
+              	password_confirmation:{
+              		required: "Confirm Password Field is required"
+              	}
+              }
+           });
+
+           $('#form2').validate({
+              rules:{
+              	name:{
+              		required:true
+              	},
+              	email:{
+              		required:true
+              	},
+              	address:{
+              		required:true
+              	},
+              	skills:{
+              		required:true
+              	},
+              },
+              messages:{
+              	name:{
+              		required: "Name Field is required"
+              	},
+              	email:{
+              		required: "Email Field is required"
+              	},
+              	address:{
+              		required: "Address Field is required"
+              	},
+              	skills:{
+              		required: "Skills Field is required"
+              	},
+              	password:{
+              		required: "Password Field is required"
+              	},
+              	
+              }
+           });
+		});
+	</script>
+
+</body>
+</html>
